@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'UILoader_Example', :exclusive => true do
+  pod "UILoader", :path => "../"
+end
+
+target 'UILoader_Tests', :exclusive => true do
+  pod "UILoader", :path => "../"
+
+  
+end
