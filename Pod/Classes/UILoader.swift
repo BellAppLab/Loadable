@@ -7,6 +7,7 @@ import UIKit
 {
     var loading: Bool { get set }
     func didChangeLoadingStatus(loading: Bool)
+    optional weak var spinningThing: UIActivityIndicatorView? { get set }
 }
 
 
@@ -54,5 +55,22 @@ extension UIViewController: UILoader
     public func didChangeLoadingStatus(loading: Bool)
     {
         
+    }
+}
+
+
+//MARK: Classes
+
+public class LoadingViewController: UIViewController
+{
+    @IBOutlet weak var spinningThing: UIActivityIndicatorView?
+    
+    override public func didChangeLoadingStatus(loading: Bool)
+    {
+        if loading {
+            self.spinningThing?.startAnimating()
+        } else {
+            self.spinningThing?.stopAnimating()
+        }
     }
 }
