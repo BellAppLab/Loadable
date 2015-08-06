@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "UILoader"
   s.version          = "0.1.0"
-  s.summary          = "A short description of UILoader."
+  s.summary          = "A small Swift library that adds convenience methods to UIKit classes so they handle loading remote data more easily."
   s.homepage         = "https://github.com/BellAppLab/UILoader"
   s.license          = 'MIT'
   s.author           = { "Bell App Lab" => "apps@bellapplab.com" }
