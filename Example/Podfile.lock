@@ -1,0 +1,14 @@
+PODS:
+  - UILoader (0.1.0)
+
+DEPENDENCIES:
+  - UILoader (from `../`)
+
+EXTERNAL SOURCES:
+  UILoader:
+    :path: ../
+
+SPEC CHECKSUMS:
+  UILoader: 0c0e4e77fa6502d53a07686d1a1ac9eabe129e2a
+
+COCOAPODS: 0.38.2

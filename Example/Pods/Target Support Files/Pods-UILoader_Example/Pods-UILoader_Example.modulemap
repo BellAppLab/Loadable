@@ -1,0 +1,6 @@
+framework module Pods_UILoader_Example {
+  umbrella header "Pods-UILoader_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
