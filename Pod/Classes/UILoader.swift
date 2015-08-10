@@ -46,7 +46,9 @@ extension UIViewController: UILoader
             if (!oldValue && !newValue) || (newValue != oldValue)
             {
                 self.willChangeValueForKey("loading")
-                self.didChangeLoadingStatus(newValue)
+                dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
+                    self.didChangeLoadingStatus(newValue)
+                })
                 self.didChangeValueForKey("loading")
             }
         }
