@@ -7,7 +7,7 @@ import UIKit
 {
     var loading: Bool { get set }
     func didChangeLoadingStatus(loading: Bool)
-    optional weak var spinningThing: UIActivityIndicatorView? { get set }
+    weak var spinningThing: UIActivityIndicatorView? { get set }
 }
 
 
@@ -24,6 +24,15 @@ extension UIViewController: UILoader
         }
         set {
             objc_setAssociatedObject(self, "loadingCount", newValue, UInt(OBJC_ASSOCIATION_RETAIN) as objc_AssociationPolicy)
+        }
+    }
+    
+    @IBOutlet weak public var spinningThing: UIActivityIndicatorView? {
+        get {
+            return objc_getAssociatedObject(self, "spinningThing") as? UIActivityIndicatorView
+        }
+        set {
+            objc_setAssociatedObject(self, "spinningThing", newValue, UInt(OBJC_ASSOCIATION_ASSIGN) as objc_AssociationPolicy)
         }
     }
     
@@ -47,6 +56,11 @@ extension UIViewController: UILoader
             {
                 self.willChangeValueForKey("loading")
                 dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
+                    if !newValue {
+                        self.spinningThing?.stopAnimating()
+                    } else {
+                        self.spinningThing?.startAnimating()
+                    }
                     self.didChangeLoadingStatus(newValue)
                 })
                 self.didChangeValueForKey("loading")
@@ -57,22 +71,5 @@ extension UIViewController: UILoader
     public func didChangeLoadingStatus(loading: Bool)
     {
         
-    }
-}
-
-
-//MARK: Classes
-
-public class LoadingViewController: UIViewController
-{
-    @IBOutlet weak var spinningThing: UIActivityIndicatorView?
-    
-    override public func didChangeLoadingStatus(loading: Bool)
-    {
-        if loading {
-            self.spinningThing?.startAnimating()
-        } else {
-            self.spinningThing?.stopAnimating()
-        }
     }
 }
