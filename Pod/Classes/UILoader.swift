@@ -17,13 +17,13 @@ extension UIViewController: UILoader
 {
     private var loadingCount: Int {
         get {
-            if var result = objc_getAssociatedObject(self, "loadingCount") as? Int {
+            if let result = objc_getAssociatedObject(self, "loadingCount") as? Int {
                 return result
             }
             return 0
         }
         set {
-            objc_setAssociatedObject(self, "loadingCount", newValue, UInt(OBJC_ASSOCIATION_RETAIN) as objc_AssociationPolicy)
+            objc_setAssociatedObject(self, "loadingCount", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
@@ -32,7 +32,7 @@ extension UIViewController: UILoader
             return objc_getAssociatedObject(self, "spinningThing") as? UIActivityIndicatorView
         }
         set {
-            objc_setAssociatedObject(self, "spinningThing", newValue, UInt(OBJC_ASSOCIATION_ASSIGN) as objc_AssociationPolicy)
+            objc_setAssociatedObject(self, "spinningThing", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
