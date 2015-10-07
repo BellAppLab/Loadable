@@ -5,8 +5,9 @@ import UIKit
 
 @objc public protocol UILoaderDelegate: NSObjectProtocol
 {
+    var loader: UILoader? { get }
     func didChangeLoadingStatus(loading: Bool)
-    weak var spinningThing: UIActivityIndicatorView? { get set }
+    weak var spinningThing: UIActivityIndicatorView? { get }
 }
 
 //MARK Default Implemententation
@@ -16,7 +17,7 @@ public class UILoader: NSObject
     private var loadingCount = 0
     private weak var delegate: UILoaderDelegate?
     
-    init(delegate: UILoaderDelegate)
+    public init(delegate: UILoaderDelegate)
     {
         super.init()
         self.delegate = delegate
