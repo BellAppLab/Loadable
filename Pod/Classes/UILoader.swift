@@ -7,7 +7,7 @@ import UIKit
 {
     var loading: Bool { get set }
     func didChangeLoadingStatus(loading: Bool)
-    weak var spinningThing: UIActivityIndicatorView? { get set }
+    var spinningThing: UIActivityIndicatorView? { get set }
 }
 
 
@@ -27,12 +27,12 @@ extension UIViewController: UILoader
         }
     }
     
-    @IBOutlet weak public var spinningThing: UIActivityIndicatorView? {
+    @IBOutlet public var spinningThing: UIActivityIndicatorView? {
         get {
             return objc_getAssociatedObject(self, "spinningThing") as? UIActivityIndicatorView
         }
         set {
-            objc_setAssociatedObject(self, "spinningThing", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, "spinningThing", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -52,7 +52,7 @@ extension UIViewController: UILoader
                 }
             }
             
-            if (!oldValue && !newValue) || (newValue != oldValue)
+            if (newValue != oldValue)
             {
                 self.willChangeValueForKey("loading")
                 dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
