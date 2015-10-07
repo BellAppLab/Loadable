@@ -3,37 +3,23 @@ import UIKit
 
 //MARK: Loading Protocols
 
-@objc public protocol UILoader: NSObjectProtocol
+@objc public protocol UILoaderDelegate: NSObjectProtocol
 {
-    var loading: Bool { get set }
     func didChangeLoadingStatus(loading: Bool)
-    var spinningThing: UIActivityIndicatorView? { get set }
+    weak var spinningThing: UIActivityIndicatorView? { get set }
 }
 
+//MARK Default Implemententation
 
-//MARK: Extensions
-
-extension UIViewController: UILoader
+public class UILoader: NSObject
 {
-    private var loadingCount: Int {
-        get {
-            if let result = objc_getAssociatedObject(self, "loadingCount") as? Int {
-                return result
-            }
-            return 0
-        }
-        set {
-            objc_setAssociatedObject(self, "loadingCount", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-        }
-    }
+    private var loadingCount = 0
+    private weak var delegate: UILoaderDelegate?
     
-    @IBOutlet public var spinningThing: UIActivityIndicatorView? {
-        get {
-            return objc_getAssociatedObject(self, "spinningThing") as? UIActivityIndicatorView
-        }
-        set {
-            objc_setAssociatedObject(self, "spinningThing", newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+    init(delegate: UILoaderDelegate)
+    {
+        super.init()
+        self.delegate = delegate
     }
     
     public var loading: Bool {
@@ -57,19 +43,14 @@ extension UIViewController: UILoader
                 self.willChangeValueForKey("loading")
                 dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
                     if !newValue {
-                        self.spinningThing?.stopAnimating()
+                        self.delegate?.spinningThing?.stopAnimating()
                     } else {
-                        self.spinningThing?.startAnimating()
+                        self.delegate?.spinningThing?.startAnimating()
                     }
-                    self.didChangeLoadingStatus(newValue)
+                    self.delegate?.didChangeLoadingStatus(newValue)
                 })
                 self.didChangeValueForKey("loading")
             }
         }
-    }
-    
-    public func didChangeLoadingStatus(loading: Bool)
-    {
-        
     }
 }
