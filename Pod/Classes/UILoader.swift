@@ -5,7 +5,7 @@ import UIKit
 
 @objc public protocol UILoaderDelegate: NSObjectProtocol
 {
-    var loader: UILoader { get }
+    var loader: UILoader! { get }
     func didChangeLoadingStatus(loading: Bool)
     weak var spinningThing: UIActivityIndicatorView? { get }
 }
