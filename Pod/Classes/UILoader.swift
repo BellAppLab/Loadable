@@ -30,16 +30,18 @@ public class UILoader: NSObject
         set {
             let oldValue = self.loading
             
+            var shouldNotify = false
+            
             if newValue {
-                loadingCount += 1
+                shouldNotify = ++loadingCount == 1
             } else {
-                loadingCount -= 1
+                shouldNotify = --loadingCount == 0
                 if loadingCount < 0 {
                     loadingCount = 0
                 }
             }
             
-            if (newValue != oldValue)
+            if (newValue != oldValue && shouldNotify)
             {
                 self.willChangeValueForKey("loading")
                 dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
