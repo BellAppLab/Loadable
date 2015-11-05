@@ -1,14 +1,14 @@
 PODS:
-  - UILoader (0.1.0)
+  - UILoader (0.6.0)
 
 DEPENDENCIES:
   - UILoader (from `../`)
 
 EXTERNAL SOURCES:
   UILoader:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  UILoader: 0c0e4e77fa6502d53a07686d1a1ac9eabe129e2a
+  UILoader: 8cc86744e7c1b68df53cc29a07b2499578a98a7a
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

@@ -1,31 +1,19 @@
 import UIKit
 
 
-//MARK: Loading Protocols
-
-@objc public protocol UILoaderDelegate: NSObjectProtocol
+public protocol UILoader
 {
-    var loader: UILoader! { get }
-    func didChangeLoadingStatus(loading: Bool)
+    var _loadingCount: Int { get set }
+    var loading: Bool { get set }
     weak var spinningThing: UIActivityIndicatorView? { get }
+    func didChangeLoadingStatus(loading: Bool)
 }
 
-//MARK: Default Implemententation
-
-public class UILoader: NSObject
+public extension UILoader
 {
-    private var loadingCount = 0
-    private weak var delegate: UILoaderDelegate?
-    
-    public init(delegate: UILoaderDelegate)
-    {
-        super.init()
-        self.delegate = delegate
-    }
-    
     public var loading: Bool {
         get {
-            return loadingCount > 0
+            return _loadingCount > 0
         }
         set {
             let oldValue = self.loading
@@ -33,26 +21,26 @@ public class UILoader: NSObject
             var shouldNotify = false
             
             if newValue {
-                shouldNotify = ++loadingCount == 1
+                shouldNotify = ++_loadingCount == 1
             } else {
-                shouldNotify = --loadingCount == 0
-                if loadingCount < 0 {
-                    loadingCount = 0
+                shouldNotify = --_loadingCount == 0
+                if _loadingCount < 0 {
+                    _loadingCount = 0
                 }
             }
             
             if (newValue != oldValue && shouldNotify)
             {
-                self.willChangeValueForKey("loading")
-                dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
-                    if !newValue {
-                        self.delegate?.spinningThing?.stopAnimating()
+                let status = self.didChangeLoadingStatus
+                let thing = self.spinningThing
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    if newValue {
+                        thing?.startAnimating()
                     } else {
-                        self.delegate?.spinningThing?.startAnimating()
+                        thing?.stopAnimating()
                     }
-                    self.delegate?.didChangeLoadingStatus(newValue)
-                })
-                self.didChangeValueForKey("loading")
+                    status(newValue)
+                }
             }
         }
     }

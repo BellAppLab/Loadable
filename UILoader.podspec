@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "UILoader"
-  s.version          = "0.5.4"
+  s.version          = "0.6.0"
   s.summary          = "A small Swift library that adds convenience methods to UIKit classes so they handle loading remote data more easily."
   s.homepage         = "https://github.com/BellAppLab/UILoader"
   s.license          = 'MIT'
@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
-
+  s.source_files = 'Pod/Classes/*.{swift}'
   s.frameworks = 'UIKit'
 end
