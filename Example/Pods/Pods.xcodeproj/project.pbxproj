@@ -18,7 +18,6 @@
 		9011049E796AFCDB4F4953B3CC75A25C /* Pods-UILoader_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CDD8BFA6D94338CDBBAC7397B4AE0 /* Pods-UILoader_Example-dummy.m */; };
 		AF811C4DB25D187BE8573FAB35E32C36 /* UILoader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 562E38DDECECD618CFB832300731E4F9 /* UILoader-dummy.m */; };
 		D51898ECB9027BAD83F13970C3B81A8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		E330AFE1D0819862280A7D5BAD33CB87 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7168A25115ABC1FBADE2BA59177E455 /* UI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,6 @@
 		8011BA65518B13AFBE16CD790A5088C7 /* Pods-UILoader_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UILoader_Example.release.xcconfig"; sourceTree = "<group>"; };
 		87CF0CD4FF4FD8874D5AE6A196ACDC30 /* Pods-UILoader_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-UILoader_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		8FAEC722090FA08F019E2DC9E44AF668 /* Pods-UILoader_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UILoader_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		A7168A25115ABC1FBADE2BA59177E455 /* UI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		B23377E46CC50F18F86F7E1BF9BB6759 /* UILoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UILoader.swift; sourceTree = "<group>"; };
 		B38BEA6E722F0C5EFB2FCA0628A3F369 /* Pods-UILoader_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UILoader_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6CB39F115756E05255E0CFB1BC88DFB /* Pods_UILoader_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UILoader_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +174,6 @@
 		DFE3C899D9760480B2D798F40ECB3D34 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A7168A25115ABC1FBADE2BA59177E455 /* UI.swift */,
 				B23377E46CC50F18F86F7E1BF9BB6759 /* UILoader.swift */,
 			);
 			path = Classes;
@@ -360,7 +357,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E330AFE1D0819862280A7D5BAD33CB87 /* UI.swift in Sources */,
 				AF811C4DB25D187BE8573FAB35E32C36 /* UILoader-dummy.m in Sources */,
 				4D4E2179B14EB0E6F53E0AF8C9BACEF4 /* UILoader.swift in Sources */,
 			);
