@@ -1,36 +1,36 @@
 import UIKit
 
 
-internal class UILoaderItem
+private class UILoaderItem
 {
     weak var item: UILoader?
     var count: Int = 0
     init(item: UILoader) {
         self.item = item
     }
-}
-
-internal var items = [UILoaderItem]()
-
-internal func find(item: UILoader) -> UILoaderItem?
-{
-    for existing in items {
-        if let tempItem = existing.item {
-            if tempItem.isEqual(item) {
-                return existing
+    
+    private static var all = [UILoaderItem]()
+    
+    static func find(item: UILoader) -> UILoaderItem?
+    {
+        for existing in all {
+            if let tempItem = existing.item {
+                if tempItem.isEqual(item) {
+                    return existing
+                }
             }
         }
+        return nil
     }
-    return nil
-}
-
-internal func make(item: UILoader) -> UILoaderItem
-{
-    if let found = find(item) {
-        return found
+    
+    static func make(item: UILoader) -> UILoaderItem
+    {
+        if let found = find(item) {
+            return found
+        }
+        all.append(UILoaderItem(item: item))
+        return all.last!
     }
-    items.append(UILoaderItem(item: item))
-    return items.last!
 }
 
 
@@ -46,11 +46,11 @@ public extension UILoader
 {
     public var loading: Bool {
         get {
-            return make(self).count > 0
+            return UILoaderItem.make(self).count > 0
         }
         set {
             let oldValue = self.loading
-            let loaderItem = make(self)
+            let loaderItem = UILoaderItem.make(self)
             
             var shouldNotify = false
             
