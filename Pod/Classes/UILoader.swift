@@ -55,9 +55,11 @@ public extension UILoader
             var shouldNotify = false
             
             if newValue {
-                shouldNotify = ++loaderItem.count == 1
+                loaderItem.count += 1
+                shouldNotify = loaderItem.count == 1
             } else {
-                shouldNotify = --loaderItem.count == 0
+                loaderItem.count -= 1
+                shouldNotify = loaderItem.count == 0
                 if loaderItem.count < 0 {
                     loaderItem.count = 0
                 }
