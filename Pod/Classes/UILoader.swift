@@ -34,11 +34,11 @@ private class UILoaderItem
 }
 
 
-@objc public protocol UILoader: NSObjectProtocol
+public protocol UILoader: NSObjectProtocol
 {
     var loading: Bool { get set }
     weak var spinningThing: UIActivityIndicatorView? { get }
-    optional func didChangeLoadingStatus(loading: Bool)
+    func didChangeLoadingStatus(loading: Bool)
 }
 
 
@@ -81,6 +81,6 @@ public extension UILoader
         } else {
             self.spinningThing?.stopAnimating()
         }
-        self.didChangeLoadingStatus?(newValue)
+        self.didChangeLoadingStatus(newValue)
     }
 }
