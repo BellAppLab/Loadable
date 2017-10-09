@@ -21,4 +21,3 @@ class ViewController: UIViewController, UILoader
         self.isLoading = false
     }
 }
-
