@@ -11,7 +11,7 @@ private class UILoaderItem
     
     private static var all = [UILoaderItem]()
     
-    static func find(item: UILoader) -> UILoaderItem?
+    static func find(_ item: UILoader) -> UILoaderItem?
     {
         for existing in all {
             if let tempItem = existing.item {
@@ -23,7 +23,7 @@ private class UILoaderItem
         return nil
     }
     
-    static func make(item: UILoader) -> UILoaderItem
+    static func make(_ item: UILoader) -> UILoaderItem
     {
         if let found = find(item) {
             return found
@@ -34,22 +34,21 @@ private class UILoaderItem
 }
 
 
-public protocol UILoader: NSObjectProtocol
+@objc public protocol UILoader: NSObjectProtocol
 {
-    var loading: Bool { get set }
-    weak var spinningThing: UIActivityIndicatorView? { get }
-    func didChangeLoadingStatus(loading: Bool)
+    func didChangeLoadingStatus(_ loading: Bool)
+    @objc optional weak var activityIndicatorView: UIActivityIndicatorView? { get }
 }
 
 
 public extension UILoader
 {
-    public var loading: Bool {
+    public var isLoading: Bool {
         get {
             return UILoaderItem.make(self).count > 0
         }
         set {
-            let oldValue = self.loading
+            let oldValue = self.isLoading
             let loaderItem = UILoaderItem.make(self)
             
             var shouldNotify = false
@@ -68,7 +67,7 @@ public extension UILoader
             if (newValue != oldValue && shouldNotify)
             {
                 let status = self.notifyStatusChange
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                DispatchQueue.main.async {
                     status(newValue)
                 }
             }
@@ -77,9 +76,9 @@ public extension UILoader
     
     private func notifyStatusChange(newValue: Bool) {
         if newValue {
-            self.spinningThing?.startAnimating()
+            self.activityIndicatorView??.startAnimating()
         } else {
-            self.spinningThing?.stopAnimating()
+            self.activityIndicatorView??.stopAnimating()
         }
         self.didChangeLoadingStatus(newValue)
     }
